@@ -1,0 +1,80 @@
+.timer {
+  height: 40vh;
+  margin-top: 2vh;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0.1em 0.2em 0.5em #140f0fc9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.timer h1 {
+  font-size: 20vw;
+  width: 60vw;
+}
+.timer .control_btn {
+  background: none;
+  border: none;
+  height: 100%;
+  cursor: pointer;
+  filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.582));
+}
+.timer .control_btn img {
+  width: 10vw;
+}
+
+@media screen and (max-width: 670px) {
+  .timer {
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .timer h1 {
+    font-size: 30vw;
+    order: 1;
+    flex: 100%;
+    margin: 0;
+  }
+  .timer .control_btn {
+    order: 2;
+    width: 50%;
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    /* display: none; */
+  }
+  .timer .control_btn:nth-child(1) {
+    order: 3;
+  }
+  .timer .control_btn img {
+    width: 40%;
+  }
+  body {
+    text-align: center;
+    background-image: url(svg/background_wave.svg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+  }
+  .App .background_wave_abstract {
+    visibility: hidden;
+    display: none;
+  }
+}
+
+@media screen and (max-height: 450px) {
+  body {
+    text-align: center;
+    background-image: url(svg/background_wave.svg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+  }
+  .App .background_wave_abstract {
+    visibility: hidden;
+    display: none;
+  }
+}
