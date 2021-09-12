@@ -13,7 +13,7 @@ function App() {
   const [mode, setMode] = useState('work')
 
   useEffect(() => {
-    document.body.style.background = stopped
+    document.body.style.backgroundColor = stopped
       ? '#323739'
       : paused
       ? 'rgb(60, 39, 0)'
@@ -44,15 +44,14 @@ function App() {
         1000
       )
     )
-    // document.body.style.background = `#152815`
-
     return true
   }
 
   const stop = () => {
     setStopped(true)
     clearInterval(interval)
-    setTime(0)
+    setTime(1500)
+    setMode('stopped')
   }
   const pause = () => {
     setPaused(true)
@@ -85,6 +84,7 @@ function App() {
         resumeEvt={resume}
         stopped={stopped}
         paused={paused}
+        mode={mode}
         changeMode={setMode}
       />
     </div>

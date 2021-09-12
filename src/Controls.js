@@ -12,10 +12,13 @@ import controls from './svg/controls.svg'
 import music from './svg/music.svg'
 import tasks from './svg/tasks.svg'
 
-const Button = ({ logo, alt, big, click, style }) => {
+const Button = ({ logo, alt, big, click, style, id, mode }) => {
+  console.log(id, mode)
   return (
     <button
-      className={`control_button${big === 'true' ? ' big' : ''}`}
+      className={`control_button${big === 'true' ? ' big' : ''}${
+        id && mode && id === mode ? ' active' : ''
+      }`}
       onClick={click}
       style={style}
     >
@@ -31,6 +34,7 @@ const Controls = ({
   paused,
   stopped,
   resumeEvt,
+  mode,
   changeMode
 }) => {
   return (
@@ -40,6 +44,8 @@ const Controls = ({
           logo={shortBreak}
           alt="short break"
           click={() => stopped && playEvt(300) && changeMode('shortBreak')}
+          id="shortBreak"
+          mode={mode}
         />
         <Button
           logo={play}
@@ -79,6 +85,8 @@ const Controls = ({
           logo={longBreak}
           alt="long break"
           click={() => stopped && playEvt(900) && changeMode('longBreak')}
+          id="longBreak"
+          mode={mode}
         />
       </div>
       <div className="actions">
