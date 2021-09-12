@@ -23,6 +23,13 @@
   width: 10vw;
 }
 
+.timer :not('.control_btn[disabled]'):hover img {
+  width: 11vw;
+}
+.control_btn[disabled] img{
+  filter: grayscale(1);
+}
+
 @media screen and (max-width: 670px) {
   .timer {
     height: 30vh;
@@ -43,9 +50,10 @@
     height: 25%;
     display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     /* display: none; */
   }
+
   .timer .control_btn:nth-child(1) {
     order: 3;
   }

@@ -31,7 +31,7 @@
 }
 .control_button.big img {
   height: 5em;
-  filter: drop-shadow(0 0 14px #000);
+  /* filter: drop-shadow(0 0 14px #000); */
 }
 
 .actions {

@@ -19,7 +19,7 @@ const Button = ({ logo, alt, big, click, style }) => {
       onClick={click}
       style={style}
     >
-      <img src={logo} alt={alt} />
+      <img src={logo} alt={alt} draggable="false" />
     </button>
   )
 }
@@ -30,7 +30,8 @@ const Controls = ({
   pauseEvt,
   paused,
   stopped,
-  resumeEvt
+  resumeEvt,
+  changeMode
 }) => {
   return (
     <div id="controls">
@@ -38,7 +39,7 @@ const Controls = ({
         <Button
           logo={shortBreak}
           alt="short break"
-          click={() => playEvt(300)}
+          click={() => stopped && playEvt(300) && changeMode('shortBreak')}
         />
         <Button
           logo={play}
@@ -74,37 +75,11 @@ const Controls = ({
             position: !stopped ? '' : 'absolute'
           }}
         />
-        {/* <Button
-          logo={pause}
-          alt="pause"
-          click={pauseEvt}
-          style={{
-            width: !stopped && !paused ? '5.6em' : '0',
-            height: !stopped && !paused ? '5.6em' : '0',
-            visibility: !stopped && !paused ? 'visible' : 'hidden',
-            position: !stopped && !paused ?"":"absolute"
-          }}
-        /> */}
-
-        {/* {stopped ? (
-          <Button
-            logo={play}
-            alt="play"
-            big="true"
-            click={() => playEvt(1500)}
-          />
-        ) : (
-          <>
-            <Button logo={stop} alt="stop" click={stopEvt} />
-            {paused ? (
-              <Button logo={play} alt="play" click={resumeEvt} />
-            ) : (
-              <Button logo={pause} alt="pause" click={pauseEvt} />
-            )}
-          </>
-        )} */}
-
-        <Button logo={longBreak} alt="long break" click={() => playEvt(900)} />
+        <Button
+          logo={longBreak}
+          alt="long break"
+          click={() => stopped && playEvt(900) && changeMode('longBreak')}
+        />
       </div>
       <div className="actions">
         <Button logo={statistics} />
