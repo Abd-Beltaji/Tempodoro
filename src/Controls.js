@@ -12,13 +12,16 @@ import controls from './svg/controls.svg'
 import music from './svg/music.svg'
 import tasks from './svg/tasks.svg'
 
-const Button = ({ logo, alt, big, click, style, id, mode }) => {
-  console.log(id, mode)
+import { useState } from 'react'
+const Button = ({ logo, alt, big, click, style, id, mode, customClass }) => {
   return (
     <button
-      className={`control_button${big === 'true' ? ' big' : ''}${
-        id && mode && id === mode ? ' active' : ''
-      }`}
+      className={[
+        'control_button',
+        big === 'true' ? 'big' : '',
+        id && mode && id === mode ? 'active' : '',
+        customClass || ''
+      ].join` `}
       onClick={click}
       style={style}
     >
@@ -35,8 +38,11 @@ const Controls = ({
   stopped,
   resumeEvt,
   mode,
-  changeMode
+  changeMode,
+  musicPlay,
+  musicPause
 }) => {
+  const [playing, setPlaying] = useState(false)
   return (
     <div id="controls">
       <div className="state_controls">
@@ -93,7 +99,15 @@ const Controls = ({
         <Button logo={statistics} />
         <Button logo={records} />
         <Button logo={controls} />
-        <Button logo={music} />
+        <Button
+          logo={music}
+          click={() =>
+            (playing ? musicPause : musicPlay)() && setPlaying(p => !p)
+          }
+          id={'music'}
+          mode={playing ? 'music' : 'notPlaying'}
+          customClass="music"
+        />
         <Button logo={tasks} />
       </div>
     </div>

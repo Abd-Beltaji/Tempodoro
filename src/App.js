@@ -4,6 +4,8 @@ import { ReactComponent as BackgroundWave } from './svg/background_wave_long.svg
 import Timer from './Timer'
 import Controls from './Controls'
 import { useState, useEffect } from 'react'
+import YouTube from 'react-youtube'
+
 function App() {
   const [time, setTime] = useState(1500)
   const [paused, setPaused] = useState(false)
@@ -11,6 +13,8 @@ function App() {
   const [interval, setIntervalValue] = useState(null)
 
   const [mode, setMode] = useState('work')
+
+  const [target, setTarget] = useState(null)
 
   useEffect(() => {
     document.body.style.backgroundColor = stopped
@@ -86,6 +90,13 @@ function App() {
         paused={paused}
         mode={mode}
         changeMode={setMode}
+        musicPlay={() => (target ? target.playVideo() || true : false)}
+        musicPause={() => (target ? target.pauseVideo() || true : false)}
+      />
+      <YouTube
+        videoId="5qap5aO4i9A"
+        onReady={evt => setTarget(evt.target)}
+        opts={{ height: '0', width: '0', playerVars: { autoplay: '1' } }}
       />
     </div>
   )
