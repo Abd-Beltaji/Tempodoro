@@ -5,17 +5,23 @@ import Timer from './Timer'
 import Controls from './Controls'
 import { useState, useEffect } from 'react'
 import YouTube from 'react-youtube'
+import { alert as customAlert } from './Alert'
 
 function App() {
   const [time, setTime] = useState(1500)
   const [paused, setPaused] = useState(false)
-  const [stopped, setStopped] = useState(true)
+  const [stopped, setStopped] = useState('notStarted')
   const [interval, setIntervalValue] = useState(null)
 
   const [mode, setMode] = useState('work')
 
   const [target, setTarget] = useState(null)
 
+  const [workTime, setWorkTime] = useState(0)
+  const [startTime, setStartTime] = useState(null)
+  const [records, setRecords] = useState(
+    JSON.parse(localStorage.getItem('records') || '[]')
+  )
   useEffect(() => {
     document.body.style.backgroundColor = stopped
       ? '#323739'
@@ -28,21 +34,60 @@ function App() {
         }[mode] || ''
   }, [mode, paused, stopped])
 
-  const play = timeAmount => {
+  useEffect(() => {
+    localStorage.setItem('records', JSON.stringify(records))
+  }, [records])
+
+  useEffect(() => {
+    if (stopped !== true) return
+    if (workTime < 30) {
+      pause()
+      customAlert(
+        'Warning!',
+        'Are you sure that you want to end this session early? (sessions under 30 seconds will not be recorded).',
+        'warning',
+        res => {
+          if (res) {
+            setMode('stopped')
+            setIntervalValue(v => clearInterval(v) || null)
+            setTime(1500)
+            setWorkTime(0)
+            setPaused(false)
+            return
+          }
+          setStopped(false)
+        }
+      )
+      return
+    }
+    setRecords([...records, { workTime, mode, startTime }])
+    setMode('stopped')
+    setIntervalValue(v => clearInterval(v) || null)
+    setTime(1500)
+    setWorkTime(0)
+    setPaused(false)
+  }, [stopped])
+  const play = (timeAmount, isResume) => {
     if (!(paused || stopped)) return false
-    setMode('work')
-    if (time === 0) setTime(timeAmount || 1500)
+    if (!isResume) {
+      setMode('work')
+      setWorkTime(0)
+      setStartTime(Date.now())
+    }
+    if (timeAmount) setTime(timeAmount)
+    if (time === 0) setTime(timeAmount || 1200)
     setStopped(false)
     setPaused(false)
+
     setIntervalValue(
       setInterval(
         () =>
           setTime(t => {
             if (t === 0) {
-              setIntervalValue(v => clearInterval(v) || null)
               setStopped(true)
               return 0
             }
+            setWorkTime(w => w + 1)
             return t - 1
           }),
         1000
@@ -53,9 +98,6 @@ function App() {
 
   const stop = () => {
     setStopped(true)
-    clearInterval(interval)
-    setTime(1500)
-    setMode('stopped')
   }
   const pause = () => {
     setPaused(true)
@@ -64,7 +106,7 @@ function App() {
 
   const resume = () => {
     setPaused(false)
-    play(time)
+    play(time, true)
   }
   return (
     <div className="App">
@@ -96,7 +138,7 @@ function App() {
       <YouTube
         videoId="5qap5aO4i9A"
         onReady={evt => setTarget(evt.target)}
-        opts={{ height: '0', width: '0', playerVars: { autoplay: '1' } }}
+        opts={{ height: '0', width: '0', playerVars: { autoplay: '0' } }}
       />
     </div>
   )

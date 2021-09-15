@@ -1,0 +1,74 @@
+#alert {
+  background-image: linear-gradient(
+    0deg,
+    rgba(114, 58, 126, 0.856),
+    rgba(49, 44, 97, 0.774)
+  );
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+#alert .alertBody {
+  background: linear-gradient(45deg, #f1cfffe3 0%, #cab6ffe3 100%);
+  padding: 1em;
+  border-radius: 1.2em;
+  text-align: center;
+  max-width: 40vw;
+  box-shadow: rgba(0, 0, 0, 0.527) 0 0.2em 1em;
+  transform: translate(0);
+  transition: all 0.3s;
+}
+
+#alert .alertBody h1 {
+  text-align: left;
+  color: rgb(65, 48, 221);
+}
+#alert .alertBody p {
+  text-align: left;
+  margin: 1em 0;
+  padding-left: 1em;
+  color: #323739;
+  text-shadow: rgb(136, 150, 231) 0 1px 3px;
+}
+
+#alert .alertBody .buttons button {
+  padding: 0.5em 0.6em;
+  margin: 0 1em;
+  min-width: 20%;
+  color: rgb(65, 48, 221);
+  cursor: pointer;
+  border: none;
+  border-radius: 0.54em;
+  font-size: 1em;
+}
+#alert .alertBody .buttons button.primary {
+  background-color: rgb(65, 48, 221);
+  color: #fff;
+}
+
+#alert .alertBody.warning h1,
+#alert .alertBody.warning .buttons button {
+  color: rgb(224, 138, 9);
+}
+#alert .alertBody.warning .buttons button.primary {
+  background-color: rgb(224, 138, 9);
+  color: #fff;
+}
+
+#alert .alertBody.error h1,
+#alert .alertBody.error .buttons button {
+  color: rgb(224, 41, 9);
+}
+#alert .alertBody.error .buttons button.primary {
+  background-color: rgb(224, 41, 9);
+  color: #fff;
+}
