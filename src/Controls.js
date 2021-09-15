@@ -10,7 +10,8 @@ import statistics from './svg/statistics.svg'
 import records from './svg/records.svg'
 import controls from './svg/controls.svg'
 import music from './svg/music.svg'
-import tasks from './svg/tasks.svg'
+// import tasks from './svg/tasks.svg'
+import github from './svg/github.svg'
 
 import { useState } from 'react'
 const Button = ({ logo, alt, big, click, style, id, mode, customClass }) => {
@@ -96,9 +97,21 @@ const Controls = ({
         />
       </div>
       <div className="actions">
-        <Button logo={statistics} click={()=>{window.location.replace("#statistics")}}/>
-        <Button logo={records} click={()=>{window.location.replace("#records")}}/>
-        <Button logo={controls} />
+        <Button
+          logo={statistics}
+          click={() => {
+            window.location.replace('#statistics')
+          }}
+        />
+        <Button
+          logo={records}
+          click={() => {
+            window.location.replace('#records')
+          }}
+        />
+        <Button logo={controls} click={() => {
+            window.location.replace('#anchor')
+          }}/>
         <Button
           logo={music}
           click={() =>
@@ -108,7 +121,12 @@ const Controls = ({
           mode={playing ? 'music' : 'notPlaying'}
           customClass="music"
         />
-        <Button logo={tasks} />
+        <Button
+          logo={github}
+          click={() => {
+            window.location.href = 'https://github.com/Abd-Beltaji/Tempodoro'
+          }}
+        />
       </div>
     </div>
   )

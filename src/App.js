@@ -148,6 +148,13 @@ function App() {
         <Records />
         <Statistics />
       </div>
+
+      <div id="anchor">
+        <p>
+          Coded with <span>❤️</span> by:{' '}
+          <a href="https://github.com/abd-Beltaji/">Abd.Beltaji</a>.
+        </p>
+      </div>
     </>
   )
 }

@@ -22,3 +22,18 @@
     flex-direction: column;
   }
 }
+
+
+#anchor{
+  text-align: center;
+  padding: 1em;
+  color: #fff;
+  font-size: 1.3em;
+}
+#anchor p span{
+  color: rgb(255, 0, 21);
+  font-weight: bolder;
+}
+#anchor p a{
+  color:#fff;
+}
