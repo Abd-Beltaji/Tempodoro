@@ -1,5 +1,5 @@
-.app {
-  height: 100vh;
+.App {
+  min-height: 100vh;
 }
 #status {
   padding: 0.5em 0;
@@ -11,5 +11,14 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 5px 8px #000) saturate(.6);
+  filter: drop-shadow(0 5px 8px #000) saturate(0.6);
+}
+
+#secondSection {
+  display: flex;
+}
+@media screen and (max-width: 768px) {
+  #secondSection {
+    flex-direction: column;
+  }
 }

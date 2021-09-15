@@ -26,7 +26,7 @@
 .timer :not('.control_btn[disabled]'):hover img {
   width: 11vw;
 }
-.control_btn[disabled] img{
+.control_btn[disabled] img {
   filter: grayscale(1);
 }
 
@@ -40,13 +40,14 @@
   }
   .timer h1 {
     font-size: 30vw;
-    order: 1;
-    flex: 100%;
+    order: 2;
+    flex: 1%;
     margin: 0;
+    line-height: 1em;
   }
   .timer .control_btn {
-    order: 2;
-    width: 50%;
+    order: 1;
+    width: 25%;
     height: 25%;
     display: flex;
     justify-content: center;
@@ -58,7 +59,7 @@
     order: 3;
   }
   .timer .control_btn img {
-    width: 40%;
+    width: 100%;
   }
   body {
     text-align: center;
@@ -70,6 +71,12 @@
   .App .background_wave_abstract {
     visibility: hidden;
     display: none;
+  }
+  .timer h1 span {
+    display: block;
+    background: red;
+    height: 0;
+    overflow: hidden;
   }
 }
 

@@ -4,7 +4,6 @@ import './index.css'
 import App from './App'
 import Alert from './Alert'
 
-
 ReactDOM.render(
   <React.StrictMode>
     <App />

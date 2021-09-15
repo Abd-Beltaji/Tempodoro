@@ -1,0 +1,89 @@
+#statistics {
+  height: 100vh;
+  width: 50vw;
+  background: linear-gradient(45deg, #313131 0%, #17141b 100%);
+  overflow: hidden scroll;
+  word-break: break-all;
+  filter: drop-shadow(#111 1px 3px 10px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#statistics h2 {
+  color: #fff;
+  padding: 0.4em 2.3em;
+  text-align: center;
+}
+#statistics .cards {
+  padding: 1em;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+#statistics .cards h3 {
+  flex: 100%;
+}
+#statistics .cards .card {
+  flex-grow: 1;
+  background-image: linear-gradient(
+    90deg,
+    rgb(238, 208, 255),
+    rgb(255, 255, 255)
+  );
+  text-align: center;
+  padding: 1em;
+  border-radius: 1em;
+  flex: 25;
+  word-break: keep-all;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+#statistics .cards h3 {
+  color: #fff;
+  text-align: left;
+}
+#statistics .cards .card h1 {
+  background: linear-gradient(90deg, #bd47ec 0%, #7500fb 100%);
+  background-clip: text;
+  color: transparent;
+}
+#statistics .cards .card p {
+  font-weight: bolder;
+}
+
+@media screen and (max-width: 768px) {
+  #statistics {
+    width: 100vw;
+  }
+}
+
+#statistics .charts {
+  width: 90%;
+  height: 50%;
+  border: solid 1px #111;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1em;;
+}
+
+#statistics .charts .bar {
+  padding: 1em;
+  background: linear-gradient(90deg, rgb(143, 0, 179), rgb(91, 0, 177));
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  filter: drop-shadow(#111 1px -3px 8px);
+}
+
+#statistics .charts .bar p:nth-child(3) {
+  transform: translateY(3em);
+}

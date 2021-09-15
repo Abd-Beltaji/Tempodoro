@@ -96,8 +96,8 @@ const Controls = ({
         />
       </div>
       <div className="actions">
-        <Button logo={statistics} />
-        <Button logo={records} />
+        <Button logo={statistics} click={()=>{window.location.replace("#statistics")}}/>
+        <Button logo={records} click={()=>{window.location.replace("#records")}}/>
         <Button logo={controls} />
         <Button
           logo={music}

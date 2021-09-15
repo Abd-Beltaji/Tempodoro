@@ -7,9 +7,13 @@
   font-family: 'Righteous', cursive;
   transition: all 0.3s ease-in-out;
 }
+html{
+  scroll-behavior: smooth;
+}
 body {
   background-color: #323739;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 header {
   padding: 1em;

@@ -13,7 +13,7 @@ const Timer = ({ time, addEvt, subEvt, stopped }) => {
         <img src={minus} alt="decrease timer by 1 minute" draggable="false" />
       </button>
       <h1>
-        {('0' + parseInt(time / 60).toString()).slice(-2)}:
+        {('0' + parseInt(time / 60).toString()).slice(-2)}<span>:</span>
         {('0' + (time % 60).toString()).slice(-2)}
       </h1>
       <button className="control_btn" onClick={addEvt} disabled={!stopped}>

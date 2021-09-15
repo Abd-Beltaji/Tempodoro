@@ -6,7 +6,8 @@ import Controls from './Controls'
 import { useState, useEffect } from 'react'
 import YouTube from 'react-youtube'
 import { alert as customAlert } from './Alert'
-
+import Records from './records/index'
+import Statistics from './statistics/index'
 function App() {
   const [time, setTime] = useState(1500)
   const [paused, setPaused] = useState(false)
@@ -60,12 +61,13 @@ function App() {
       )
       return
     }
-    setRecords([...records, { workTime, mode, startTime }])
+    setRecords([...records, { workTime: workTime / 2, mode, startTime }])
     setMode('stopped')
     setIntervalValue(v => clearInterval(v) || null)
     setTime(1500)
     setWorkTime(0)
     setPaused(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stopped])
   const play = (timeAmount, isResume) => {
     if (!(paused || stopped)) return false
@@ -109,38 +111,44 @@ function App() {
     play(time, true)
   }
   return (
-    <div className="App">
-      <BackgroundWave className="background_wave_abstract" />
-      <header className="App-header">
-        <TempodoroLogo className="logo" />
-      </header>
-      <Timer
-        time={time}
-        addEvt={() => stopped && setTime(t => t + 30)}
-        subEvt={() => stopped && setTime(t => (t > 30 ? t - 30 : t))}
-        stopped={stopped}
-      />
-      <h2 id="status">
-        Current Task:<span> {mode}.</span>
-      </h2>
-      <Controls
-        playEvt={play}
-        pauseEvt={pause}
-        stopEvt={stop}
-        resumeEvt={resume}
-        stopped={stopped}
-        paused={paused}
-        mode={mode}
-        changeMode={setMode}
-        musicPlay={() => (target ? target.playVideo() || true : false)}
-        musicPause={() => (target ? target.pauseVideo() || true : false)}
-      />
-      <YouTube
-        videoId="5qap5aO4i9A"
-        onReady={evt => setTarget(evt.target)}
-        opts={{ height: '0', width: '0', playerVars: { autoplay: '0' } }}
-      />
-    </div>
+    <>
+      <div className="App">
+        <BackgroundWave className="background_wave_abstract" />
+        <header className="App-header">
+          <TempodoroLogo className="logo" />
+        </header>
+        <Timer
+          time={time}
+          addEvt={() => stopped && setTime(t => t + 30)}
+          subEvt={() => stopped && setTime(t => (t > 30 ? t - 30 : t))}
+          stopped={stopped}
+        />
+        <h2 id="status">
+          Current Task:<span> {mode}.</span>
+        </h2>
+        <Controls
+          playEvt={play}
+          pauseEvt={pause}
+          stopEvt={stop}
+          resumeEvt={resume}
+          stopped={stopped}
+          paused={paused}
+          mode={mode}
+          changeMode={setMode}
+          musicPlay={() => (target ? target.playVideo() || true : false)}
+          musicPause={() => (target ? target.pauseVideo() || true : false)}
+        />
+        <YouTube
+          videoId="5qap5aO4i9A"
+          onReady={evt => setTarget(evt.target)}
+          opts={{ height: '0', width: '0', playerVars: { autoplay: '0' } }}
+        />
+      </div>
+      <div id="secondSection">
+        <Records />
+        <Statistics />
+      </div>
+    </>
   )
 }
 
