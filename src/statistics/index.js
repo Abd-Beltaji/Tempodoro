@@ -1,7 +1,7 @@
 import './main.css'
 // import { useRef, useEffect } from 'react'
 const Statistics = () => {
-  let records = JSON.parse(localStorage.getItem('records'))
+  let records = JSON.parse(localStorage.getItem('records')) || []
   let todayRecords = records.filter(
     record =>
       new Date(record.startTime).setHours(0, 0, 0, 0) ===

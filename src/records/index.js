@@ -1,6 +1,6 @@
 import './main.css'
 const Records = () => {
-  let records = JSON.parse(localStorage.getItem('records'))
+  let records = JSON.parse(localStorage.getItem('records')) || []
   return (
     <div className="records" id="records">
       <h2>Records 📼</h2>
@@ -12,7 +12,7 @@ const Records = () => {
           <th data-icon="⏳">Total Time</th>
         </tr>
         {records.map(record => {
-          let date = new Date(record.startTime)
+          let date = new Date(record.startTime || 0)
           let minutes = date.getMinutes()
           let workTime = Math.round(record.workTime / 60)
           return (
@@ -26,14 +26,12 @@ const Records = () => {
                 {date.getHours() >= 12 ? 'PM' : 'AM'}
               </td>
               <td>
-                {
-                  {
-                    work: 'work 🧑‍💻',
-                    shortBreak: 'short break ☕',
-                    longBreak: 'long break 🛌',
-                    stopped: 'work 🧑‍💻'
-                  }[record.mode]
-                }
+                {{
+                  work: 'work 🧑‍💻',
+                  shortBreak: 'short break ☕',
+                  longBreak: 'long break 🛌',
+                  stopped: 'work 🧑‍💻'
+                }[record.mode] || ''}
               </td>
               <td>
                 {workTime} minute{workTime > 1 ? 's' : ''}
