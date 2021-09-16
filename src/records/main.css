@@ -29,7 +29,10 @@
   text-shadow: #fff 2px 0, #fff -2px 0, #fff 0 2px, #fff 0 -2px;
   word-break: keep-all;
 }
-
+#records p{
+  text-align: center;
+  color:rgb(196, 196, 196)
+}
 #records table tr {
   text-align: center;
 }

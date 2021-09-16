@@ -111,7 +111,7 @@ function App() {
     play(time, true)
   }
   return (
-    <>
+    <div>
       <div className="App">
         <BackgroundWave className="background_wave_abstract" />
         <header className="App-header">
@@ -151,11 +151,11 @@ function App() {
 
       <div id="anchor">
         <p>
-          Coded with <span>❤️</span> by:{' '}
+          <span>👨‍💻</span> with <span>❤️</span> by:{' '}
           <a href="https://github.com/abd-Beltaji/">Abd.Beltaji</a>.
         </p>
       </div>
-    </>
+    </div>
   )
 }
 
