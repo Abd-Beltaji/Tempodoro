@@ -51,7 +51,6 @@ function App() {
         'warning',
         res => {
           if (res) {
-            alert('stopped 1')
             setMode('stopped')
             setIntervalValue(v => clearInterval(v) || null)
             setTime(1500)
@@ -65,8 +64,6 @@ function App() {
       return
     }
     setRecords([...records, { workTime: workTime / 2, mode, startTime }])
-    alert('stopped 2')
-
     setMode('stopped')
     setIntervalValue(v => clearInterval(v) || null)
     setTime(1500)
@@ -90,7 +87,6 @@ function App() {
       setInterval(
         () =>
           setTime(t => {
-            console.log(mode)
             if (t === 0) {
               var img = './tempodoro.png'
               setMode(
