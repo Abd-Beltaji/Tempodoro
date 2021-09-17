@@ -19,15 +19,6 @@ const Statistics = () => {
     .reduce((a, r) => a + r, 0)
 
   let todayBreakCount = todayRecords.filter(r => r.mode !== 'work').length
-
-  console.log(
-    records,
-    todayRecords,
-    todayWorkSeconds,
-    todayBreakSeconds,
-    todayBreakCount
-  )
-
   let groupedbyDate = {}
   records.forEach(r => {
     let date = new Date(r.startTime).setHours(0, 0, 0, 0)

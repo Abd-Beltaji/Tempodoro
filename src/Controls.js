@@ -58,7 +58,7 @@ const Controls = ({
           logo={play}
           alt="play"
           big="true"
-          click={() => playEvt(1500)}
+          click={() => playEvt()}
           style={{
             width: stopped ? '8.6em' : '0px',
             height: stopped ? '8.6em' : '0px',

@@ -23,6 +23,8 @@ function App() {
   const [records, setRecords] = useState(
     JSON.parse(localStorage.getItem('records') || '[]')
   )
+  let bell = new Audio('./audio/bell.mp3')
+  Notification.requestPermission()
   useEffect(() => {
     document.body.style.backgroundColor = stopped
       ? '#323739'
@@ -49,6 +51,7 @@ function App() {
         'warning',
         res => {
           if (res) {
+            alert('stopped 1')
             setMode('stopped')
             setIntervalValue(v => clearInterval(v) || null)
             setTime(1500)
@@ -62,6 +65,8 @@ function App() {
       return
     }
     setRecords([...records, { workTime: workTime / 2, mode, startTime }])
+    alert('stopped 2')
+
     setMode('stopped')
     setIntervalValue(v => clearInterval(v) || null)
     setTime(1500)
@@ -71,13 +76,13 @@ function App() {
   }, [stopped])
   const play = (timeAmount, isResume) => {
     if (!(paused || stopped)) return false
-    if (!isResume) {
+    if (isResume !== true) {
       setMode('work')
       setWorkTime(0)
       setStartTime(Date.now())
     }
-    if (timeAmount) setTime(timeAmount)
-    if (time === 0) setTime(timeAmount || 1200)
+    // if (timeAmount) setTime(timeAmount)
+    if (time === 0 || timeAmount) setTime(timeAmount || 1200)
     setStopped(false)
     setPaused(false)
 
@@ -85,8 +90,23 @@ function App() {
       setInterval(
         () =>
           setTime(t => {
+            console.log(mode)
             if (t === 0) {
+              var img = './tempodoro.png'
+              setMode(
+                mode =>{
+                  new Notification('To do list', {
+                    body: `You have finished your session! time to ${
+                      mode === 'work' ? 'take a break' : 'get back to work'
+                    }!`,
+                    icon: img
+                  })
+                }
+              )
+
               setStopped(true)
+              bell.play()
+
               return 0
             }
             setWorkTime(w => w + 1)
@@ -124,7 +144,7 @@ function App() {
           stopped={stopped}
         />
         <h2 id="status">
-          Current Task:<span> {mode}.</span>
+          Current mode:<span> {mode}.</span>
         </h2>
         <Controls
           playEvt={play}
