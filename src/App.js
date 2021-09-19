@@ -42,6 +42,16 @@ function App() {
   }, [records])
 
   useEffect(() => {
+    document.title = `${
+      time === 0 || stopped
+        ? ''
+        : ('0' + parseInt(time / 60).toString()).slice(-2) +
+          ':' +
+          ('0' + (time % 60).toString()).slice(-2) +
+          ' |'
+    } Tempodoro`
+  }, [time])
+  useEffect(() => {
     if (stopped !== true) return
     if (workTime < 30) {
       pause()
@@ -88,24 +98,43 @@ function App() {
         () =>
           setTime(t => {
             if (t === 0) {
+              setStopped(true)
+              bell.play()
+
               var img = './tempodoro.png'
-              setMode(
-                mode =>{
-                  new Notification('To do list', {
+              setMode(mode => {
+                if (/android/i.test(navigator.userAgent)) {
+                  // navigator.serviceWorker.register('sw.js')
+                  Notification.requestPermission(function (result) {
+                    if (result === 'granted') {
+                      navigator.serviceWorker.ready.then(function (
+                        registration
+                      ) {
+                        registration.showNotification('Tempodoro', {
+                          body: `You have finished your session! time to ${
+                            mode === 'work'
+                              ? 'take a break'
+                              : 'get back to work'
+                          }!`,
+                          icon: img
+                        })
+                      })
+                    }
+                  })
+                } else
+                  new Notification('Tempodoro', {
                     body: `You have finished your session! time to ${
                       mode === 'work' ? 'take a break' : 'get back to work'
                     }!`,
                     icon: img
                   })
-                }
-              )
-
-              setStopped(true)
-              bell.play()
+                return mode
+              })
 
               return 0
             }
             setWorkTime(w => w + 1)
+            document.title = ``
             return t - 1
           }),
         1000
