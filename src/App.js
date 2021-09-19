@@ -50,6 +50,7 @@ function App() {
           ('0' + (time % 60).toString()).slice(-2) +
           ' |'
     } Tempodoro`
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time])
   useEffect(() => {
     if (stopped !== true) return
